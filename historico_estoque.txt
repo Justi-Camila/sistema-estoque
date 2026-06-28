@@ -1,0 +1,2 @@
+[28/06/2026 15:25:23] CADASTRO E ENTRADA - 15 unidades de 'caneta' por Camila (ID: 5288904)
+[28/06/2026 15:25:38] SAÍDA - 5 unidades de 'caneta' retiradas por Camila (ID: 5288904)

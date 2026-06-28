@@ -65,11 +65,12 @@ class Estoque:
             prod.quantidade += qtd
             prod.data_entrada = data_entrada
             self.salvar_historico(f"ENTRADA - {qtd} unidades de '{prod.name}' por {self.func.name} (ID: {self.func.id})")
+            print()
         else:
             novo_produto = Produto(id_prod, name, qtd, data_entrada)
             self.produtos.append(novo_produto)
-            self.salvar_historico(
-                f"CADASTRO E ENTRADA - {qtd} unidades de '{name}' por {self.func.name} (ID: {self.func.id})")
+            self.salvar_historico(f"CADASTRO E ENTRADA - {qtd} unidades de '{name}' por {self.func.name} (ID: {self.func.id})")
+            print()
 
         self.salvar_produtos()
 
@@ -84,19 +85,19 @@ class Estoque:
         prod = self.selecionar_produto(id_prod)
 
         if not prod:
-            print("Erro: Produto não encontrado no sistema.")
+            print("Erro: Produto não encontrado no sistema.\n")
             return False
 
         if qtd > prod.quantidade:
-            print(f"Erro: Quantidade solicitada ({qtd}) é maior que o estoque atual ({prod.quantidade}). Transação impedida.")
+            print(f"Erro: Quantidade solicitada ({qtd}) é maior que o estoque atual ({prod.quantidade}). Transação impedida.\n")
             return False
         elif qtd <= 0:
-            print("Erro: A quantidade de retirada deve ser maior que zero.")
+            print("Erro: A quantidade de retirada deve ser maior que zero.\n")
             return False
 
         prod.quantidade -= qtd
-        self.salvar_historico(
-            f"SAÍDA - {qtd} unidades de '{prod.name}' retiradas por {self.func.name} (ID: {self.func.id})")
+        self.salvar_historico(f"SAÍDA - {qtd} unidades de '{prod.name}' retiradas por {self.func.name} (ID: {self.func.id})")
+        print()
 
         self.salvar_produtos()
         return True
@@ -113,7 +114,7 @@ class Estoque:
         print("\n--- ATUAL ESTADO DO ESTOQUE ---")
         for produto in self.produtos:
             print(produto)
-        print("--------------------------------")
+        print("--------------------------------\n")
 
 
     def salvar_historico(self, mensagem: str):
@@ -185,10 +186,10 @@ class Estoque:
                     if prod:
                         print(f"\n[PRODUTO ENCONTRADO] -> {prod}")
                     else:
-                        print("\nProduto não localizado no estoque.")
+                        print("\nProduto não localizado no estoque.\n")
                 except ValueError:
                     # Tratamento de erro para evitar que o programa encerre se digitarem letras.
-                    print("Erro: Por favor, digite um número inteiro válido.")
+                    print("Erro: Por favor, digite um número inteiro válido.\n")
 
             elif escolha == "2":
                 # Restrição de acesso, apenas o setor de Almoxarifado pode registrar produtos.
@@ -200,7 +201,7 @@ class Estoque:
                             break
                         except ValueError:
                             # Tratamento de erro para evitar que o programa encerre se digitarem letras.
-                            print("Erro: Por favor, digite um número inteiro válido.")
+                            print("Erro: Por favor, digite um número inteiro válido.\n")
 
                     prod_existente = self.selecionar_produto(id_produto)
 
@@ -226,7 +227,7 @@ class Estoque:
                             break
                         except ValueError:
                             # Tratamento de erro para evitar que o programa encerre se digitarem letras.
-                            print("Erro: Por favor, digite um número inteiro válido.")
+                            print("Erro: Por favor, digite um número inteiro válido.\n")
 
                     while True:
                         data_entrada = input("Por favor, insira a data de entrada (DD/MM/AAAA): ").strip()
@@ -260,7 +261,7 @@ class Estoque:
                                 print(f"Produto não localizado\n")
                             break
                         except ValueError:
-                            print("Erro: Por favor, digite um número inteiro válido.")
+                            print("Erro: Por favor, digite um número inteiro válido.\n")
 
                     # O fluxo de retirada só acontece se o id for válido e localizado.
                     if prod_existente:
@@ -269,14 +270,12 @@ class Estoque:
                                 quantidade = int(input("Por favor, insira a quantidade do produto: "))
                                 # Validação para impedir quantidades menores ou iguais a zero.
                                 if quantidade <= 0:
-                                    print("Erro: A quantidade de retirada deve ser maior que zero.")
-                                    continue
-                                break
+                                    print("Erro: A quantidade de retirada deve ser maior que zero.\n")
+                                else:
+                                    self.retirar_produto(id_produto, quantidade)
                             except ValueError:
                                 # Tratamento de erro para evitar que o programa encerre se digitarem letras.
-                                print("Erro: Por favor, digite um número inteiro válido.")
-
-                        self.retirar_produto(id_produto, quantidade)
+                                print("Erro: Por favor, digite um número inteiro válido.\n")
 
                 else:
                     print("Você não está autorizado a fazer retiradas!\n")
@@ -292,7 +291,7 @@ class Estoque:
 
             elif escolha == "7":
                 # Finaliza o loop e encerra a execução do programa
-                print("Encerrando o sistema de estoque. Até logo!")
+                print("Encerrando o sistema de estoque. Até logo!\n")
                 break
 
             else:
