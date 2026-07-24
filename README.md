@@ -32,7 +32,7 @@ Um sistema simples de gerenciamento de estoque desenvolvido em Python, rodando v
 ## 🛠️ Como Executar
 
 ### Pré-requisitos
-- Ter o **Python 3.x** instalado na sua máquina.
+- Ter o  [Python](https://www.python.org/downloads/) (versão 3.x) instalado na sua máquina.
 
 ### Passos para rodar
 
